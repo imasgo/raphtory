@@ -13,8 +13,8 @@ class FileSpout extends SpoutTrait {
   println("Start: " + LocalDateTime.now())
   println(System.getProperty("user.dir"))
 
-  val directory = System.getenv().getOrDefault("FILE_SPOUT_DIRECTORY", "/Users/imasgo/Downloads/splitcsv-1ce17e2c-d1fb-4dcb-8305-b6d0b1b34fa4-results").trim
-  val fileName = System.getenv().getOrDefault("FILE_SPOUT_FILENAME", "transactions9000000_9100000-4.csv").trim //gabNetwork500.csv
+  val directory = System.getenv().getOrDefault("FILE_SPOUT_DIRECTORY", "/app").trim
+  val fileName = System.getenv().getOrDefault("FILE_SPOUT_FILENAME", "transactions9000000_9100000.csv").trim //gabNetwork500.csv
   val dropHeader = System.getenv().getOrDefault("FILE_SPOUT_DROP_HEADER", "false").trim.toBoolean
 
   var filePosition         = 0
@@ -65,8 +65,8 @@ class FileSpout extends SpoutTrait {
     if(dropHeader)
       Source.fromFile(filesToRead(pos)).getLines.drop(1).toArray
     else
-      print(Source.fromFile(filesToRead(pos)).getLines.toArray)
-      Source.fromFile(filesToRead(pos)).getLines.toArray
+//      print(Source.fromFile(filesToRead(pos)).getLines.toArray)
+    Source.fromFile(filesToRead(pos)).getLines.toArray
   }
 
   def getListOfFiles(dir: String):Array[String] = {
@@ -79,4 +79,3 @@ class FileSpout extends SpoutTrait {
   }
 
 }
-
